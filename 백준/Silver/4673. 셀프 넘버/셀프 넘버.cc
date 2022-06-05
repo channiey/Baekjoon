@@ -52,7 +52,7 @@ int Get_NotSelfNum(int iN)
 {
 	int iSum(iN), iTemp(0);
 
-	for (int i = 4; i >= 0; --i)
+	for (int i = log10(SIZE); i >= 0; --i)
 	{
 		iSum += iN / pow(10, i);
 		if (iN != iSum)
