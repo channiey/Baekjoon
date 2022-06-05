@@ -5,47 +5,47 @@ using namespace std;
 
 #define SIZE 10000
 
-int Get_NotSelfNum(int iN); // 문제에서의 d(n)
+void Get_NotSelfNums(vector <int>& vecNotSelfNums); 	// 10,000이하의 셀프넘버가 아닌 수들을 구함 (vecNotSelfNums 세팅)
+
+int Get_NotSelfNum(int iN); // 셀프넘버가 아닌 수들을 반환 (위 함수에서 사용)
+
+void Set_SelfNums(vector <int>& vecSelfNums, vector <int>& vecNotSelfNums); // 셀프넘버 세팅 (vecSelfNums에서 vecNotSelfNums을 빼주는 형식)
+
+void Print_SelfNums(vector <int>& vecSelfNums); // 셀프넘버 출력
 
 int main(void)
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	vector <int> vecSelfNum, vecNotSelfNum;
-	int iTemp(0), index(0);
+	vector <int> vecSelfNums, vecNotSelfNums;
+	int iTemp(0);
 
-	// 10,000이하의 셀프넘버가 아닌 수들을 구함 (vecNotSelfNum 세팅)
+	for (int i = 0; i <= SIZE; ++i) // (vecSelfNums 세팅)
+	{
+		vecSelfNums.push_back(i);
+	}
+
+	Get_NotSelfNums(vecNotSelfNums);
+
+	Set_SelfNums(vecSelfNums, vecNotSelfNums);
+
+	Print_SelfNums(vecSelfNums);
+
+	return 0;
+}
+
+void Get_NotSelfNums(vector <int>& vecNotSelfNums)
+{
+	int iTemp(0);
+
 	for (int i = 0; i <= SIZE; ++i)
 	{
 		iTemp = Get_NotSelfNum(i);
 
 		if (iTemp <= SIZE)
-			vecNotSelfNum.push_back(iTemp);
+			vecNotSelfNums.push_back(iTemp);
 	}
-	
-	// SIZE만큼의 또 다른 벡터 생성 (vecSelfNum 세팅)
-	for (int i = 0; i <= SIZE; ++i)
-	{
-		vecSelfNum.push_back(i);
-	}
-
-	// 셀프넘버 세팅 (vecSelfNum에서 vecNotSelfNum을 빼주는 형식)
-	for (int i = 0; i < vecNotSelfNum.size(); ++i)
-	{
-		index = vecNotSelfNum[i];
-
-		vecSelfNum[index] = NULL;
-	}
-
-	// 셀프넘버 출력
-	for (int i = 0; i < vecSelfNum.size(); ++i)
-	{
-		if (vecSelfNum[i] != NULL)
-			cout << vecSelfNum[i] << "\n";
-	}
-
-	return 0;
 }
 
 int Get_NotSelfNum(int iN)
@@ -63,4 +63,24 @@ int Get_NotSelfNum(int iN)
 	}
 
 	return iSum;
+}
+
+void Set_SelfNums(vector <int>& vecSelfNums, vector <int>& vecNotSelfNums)
+{
+	int iIndex(0);
+	for (int i = 0; i < vecNotSelfNums.size(); ++i)
+	{
+		iIndex = vecNotSelfNums[i];
+
+		vecSelfNums[iIndex] = NULL;
+	}
+}
+
+void Print_SelfNums(vector <int>& vecSelfNums)
+{
+	for (int i = 0; i < vecSelfNums.size(); ++i)
+	{
+		if (vecSelfNums[i] != NULL)
+			cout << vecSelfNums[i] << "\n";
+	}
 }
