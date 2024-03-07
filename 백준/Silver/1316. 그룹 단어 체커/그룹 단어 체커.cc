@@ -6,8 +6,8 @@ using namespace std;
 int main()
 {
 	int iInput = 0;
-	string strInput;
 	int iResult = 0;
+	string strInput;
 
 	cin >> iInput;
 	iResult = iInput;
