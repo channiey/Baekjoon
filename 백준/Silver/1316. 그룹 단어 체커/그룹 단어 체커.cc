@@ -5,37 +5,36 @@ using namespace std;
 
 int main()
 {
-	int iNumberOfWholeWord = 0;
-	int iNumberOfGroupWord = 0;
+	int iInput = 0;
 	string strInput;
+	int iResult = 0;
 
-	cin >> iNumberOfWholeWord;
-	iNumberOfGroupWord = iNumberOfWholeWord;
+	cin >> iInput;
+	iResult = iInput;
 
-	for (size_t i = 0; i < iNumberOfWholeWord; ++i)
+	while (iInput--)
 	{
 		cin >> strInput;
 
-		string strSubs;
-		strSubs.push_back(strInput.front());
+		bool bUsed[26] = { false };
+		bUsed[strInput[0] - 'a'] = true;
 
-		for (size_t j = 1; j < strInput.length(); ++j)
+		for (size_t i = 1; i < strInput.length(); ++i)
 		{
-			const char comp = *(strSubs.end() - 1);
-			if (comp != strInput[j])
+			if (strInput[i - 1] != strInput[i])
 			{
-				if (string::npos != strSubs.find(strInput[j]))
+				if (bUsed[strInput[i] - 'a'])
 				{
-					--iNumberOfGroupWord;
+					--iResult;
 					break;
 				}
 				else
-					strSubs.push_back(strInput[j]);
+					bUsed[strInput[i] - 'a'] = true;
 			}
 		}
 	}
 
-	cout << iNumberOfGroupWord;
+	cout << iResult;
 
 	return 0;
 }
