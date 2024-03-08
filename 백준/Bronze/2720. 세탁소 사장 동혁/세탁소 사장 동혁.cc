@@ -1,5 +1,7 @@
 #include <iostream>
 
+using namespace std;
+
 int main()
 {
 	const int iTableNum = 4;
@@ -8,22 +10,18 @@ int main()
 	int iTestCase = 0;
 	int iChange = 0;
 
-	std::cin >> iTestCase;
+	cin >> iTestCase;
 
 	while (iTestCase--)
 	{
-		std::cin >> iChange;
+		cin >> iChange;
 
 		for (int i = 0; i < iTableNum; i++)
 		{
-			if (0 == iChange)
-			{
-				std::cout << 0 << " ";
-				continue;
-			}
+			const int iOutPut = (0 == iChange) ? 0 : iChange / iTable[i];
 
-			std::cout << iChange / iTable[i] << " ";
-
+			cout << iOutPut << " ";
+			
 			iChange %= iTable[i];
 		}
 	}
