@@ -2,20 +2,14 @@
 
 int main()
 {
-	int iN = 0;
+	int iInput = 0;
+	std::cin >> iInput;
 
-	std::cin >> iN;
-
-	int iIndex = 1;
 	int iSum = 1;
+	int iIndex = 1;
 
-	while (true)
-	{
-		if (iN <= iSum)
-			break;
-
+	while (iSum < iInput)
 		iSum += 6 * iIndex++;
-	}
 	
 	std::cout << iIndex;
 
