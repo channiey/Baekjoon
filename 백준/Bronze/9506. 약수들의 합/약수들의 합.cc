@@ -4,6 +4,7 @@
 using namespace std;
 
 const bool IsPerfect(const int& iInput, vector<int>& _vecDivisor);
+void PrintDivisors(const int& iInput, const vector<int>& _vecDivisor);
 
 int main()
 {
@@ -11,6 +12,7 @@ int main()
 	cin.tie(NULL);
 
 	int iInput = 0;
+	vector<int> vecDivisor;
 
 	while (true)
 	{
@@ -18,25 +20,14 @@ int main()
 
 		if (-1 == iInput) break;
 
-		vector<int> vecDivisor;
-
 		if (IsPerfect(iInput, vecDivisor))
-		{
-			cout << iInput << " = ";
-
-			for (int iDivisor : vecDivisor)
-			{
-				cout << iDivisor;
-
-				if (iDivisor != vecDivisor.back())
-					cout << " + ";
-			}
-		}
+			PrintDivisors(iInput, vecDivisor);
 		else
-		{
 			cout << iInput << " is NOT perfect.";
-		}
+
 		cout << endl;
+
+		vecDivisor.clear();
 	}
 
 	return 0;
@@ -56,4 +47,17 @@ const bool IsPerfect(const int& iInput, vector<int>& _vecDivisor)
 	}
 
 	return (iInput == iSum);
+}
+
+void PrintDivisors(const int& iInput, const vector<int>& _vecDivisor)
+{
+	cout << iInput << " = ";
+
+	for (int iDivisor : _vecDivisor)
+	{
+		cout << iDivisor;
+
+		if (iDivisor != _vecDivisor.back())
+			cout << " + ";
+	}
 }
