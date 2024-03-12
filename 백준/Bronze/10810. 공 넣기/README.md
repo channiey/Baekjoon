@@ -1,4 +1,4 @@
-# [Bronze II] 공 넣기 - 10810 
+# [Bronze III] 공 넣기 - 10810 
 
 [문제 링크](https://www.acmicpc.net/problem/10810) 
 
@@ -8,7 +8,11 @@
 
 ### 분류
 
-구현(implementation), 시뮬레이션(simulation)
+구현, 시뮬레이션
+
+### 제출 일자
+
+2023년 2월 21일 09:29:01
 
 ### 문제 설명
 
