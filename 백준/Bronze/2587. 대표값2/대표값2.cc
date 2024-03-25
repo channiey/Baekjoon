@@ -11,7 +11,7 @@ int main()
 	{
 		std::cin >> input;
 		
-		++Bucket[input / 10 - 1]; 
+		++Bucket[input / 10 - 1]; // Radix Sort 개념 사용
 	
 		acc += input;
 	}
