@@ -1,56 +1,69 @@
 #include <iostream>
 
-using namespace std;
+void Swap(int* Data, const int& n, const int& m);
 
-inline void Swap(int* _pA, int* _pB) { int iTemp = *_pA; *_pA = *_pB; *_pB = iTemp; }
-void BubbleSort(int* _pArr, const int _iSize);
-void PrintArr(int* _pArr, const int _iSize);
+void Heapify(int* Data, const int& size, const int& node);
 
-int main (void)
+void HeapSort(int* Data, const int& size);
+
+int main()
 {
-	int iN = 0, iTemp = 0;
-	do
-	{
-		cin >> iN;
-	} while (1 > iN || 1000 < iN);
+	int size{};
 
-	int *arr = new int[iN];
+	std::cin >> size;
 
-	for (int i = 0; i < iN; ++i)
-	{
-		do
-		{
-			cin >> iTemp;
-		} while (-1000 > iTemp || 1000 < iTemp);
+	int* Data = new int[size] {};
 
-		arr[i] = iTemp;
-	}
+	for (int i = 0; i < size; i++)
+		std::cin >> Data[i];
+	
+	HeapSort(Data, size);
 
-	BubbleSort(arr, iN);
+	for (int i = 0; i < size; i++)
+		std::cout << Data[i] << "\n";
 
-	PrintArr(arr, iN);
-
-	delete[] arr;
+	delete[] Data;
 
 	return 0;
 }
 
-void BubbleSort(int* _pArr, const int _iSize)
+void Swap(int* Data, const int& n, const int& m)
 {
-	for (int i = 0; i < _iSize - 1; ++i)
-	{
-		for (int j = 0; j < _iSize - 1 - i; ++j)
-		{
-			if (_pArr[j] > _pArr[j + 1])
-				Swap(&_pArr[j], &_pArr[j + 1]);
-		}
-	}
+	const int temp = Data[n];
+	Data[n] = Data[m];
+	Data[m] = temp;
 }
 
-void PrintArr(int* _pArr, const int _iSize)
+void Heapify(int* Data, const int& size, const int& node)
 {
-	for (int i = 0; i < _iSize; ++i)
+	int largest{ node };
+	int left{ 2 * node + 1}, right{ 2 * node + 2 };
+
+	if (left < size && Data[largest] < Data[left])
+		largest = left;
+
+	if (right < size &&Data[largest] < Data[right])
+		largest = right;
+
+	if (node != largest)
 	{
-		cout << _pArr[i] << endl;
+		Swap(Data, node, largest);
+		Heapify(Data, size, largest);
 	}
+
+	return;
+}
+
+void HeapSort(int* Data, const int& size)
+{
+	for (int i = size / 2 - 1; i >= 0; i--)
+		Heapify(Data, size, i);
+
+	for (int i = size - 1; i > 0; i--)
+	{
+		Swap(Data, 0, i);
+		Heapify(Data, i, 0);
+	}
+
+	return;
 }
