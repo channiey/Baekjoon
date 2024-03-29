@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 struct NODE
 {
@@ -93,28 +94,23 @@ int main()
 	int n{}, k{};
 	Queue queue{};
 
-	std::cin >> n >> k;
+	cin >> n >> k;
 
 	for (int i = 1; i <= n; i++)
 		queue.Enqueu(i);
 
-	std::cout << "<";
+	cout << "<";
 	while (!queue.Empty())
 	{
-		for (int i = 0; i < k; i++)
-		{
-			if (k - 1 == i)
-			{
-				std::cout << queue.Dequeue();
+		for (int i = 0; i < k - 1; i++)
+			queue.Enqueu(queue.Dequeue());
 
-				if (!queue.Empty())
-					std::cout << ", ";
-			}
-			else
-				queue.Enqueu(queue.Dequeue());
-		}
+		cout << queue.Dequeue();
+
+		if (!queue.Empty())
+			cout << ", ";
 	}
-	std::cout << ">";
+	cout << ">";
 
 	return 0;
 }
