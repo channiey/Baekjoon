@@ -1,29 +1,22 @@
 #include <iostream>
-using namespace std;
 
-int Fibonacci(int iN);
-
-int main(void)
+const int Fibonacci(const int& n)
 {
-	int iN(0);
-
-	do
-	{
-		cin >> iN;
-	} while (iN < 0 || 20 < iN);
-
-	cout << Fibonacci(iN);
-
-	return 0;
-}
-
-int Fibonacci(int iN)
-{
-	if (iN == 0)
+	if (0 == n)
 		return 0;
-
-	else if (iN == 1)
+	else if (1 == n)
 		return 1;
 
-	else return Fibonacci(iN - 1) + Fibonacci(iN - 2);
+	return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+
+int main()
+{
+	int n{};
+
+	std::cin >> n;
+
+	std::cout << Fibonacci(n);
+
+	return 0;
 }
