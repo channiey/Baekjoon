@@ -5,9 +5,6 @@ using namespace std;
 const bool DFS(const vector<vector<int>>& Vertices, 
 	vector<bool>& Checked, const int& index, const int& prev)
 {
-	if (Checked[index])
-		return false;
-
 	Checked[index] = true;
 
 	for (const int& adjacent : Vertices[index])
