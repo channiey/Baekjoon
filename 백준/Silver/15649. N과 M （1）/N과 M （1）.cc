@@ -1,32 +1,25 @@
 #include <iostream>
-#include <vector>	
-#include <queue>
+#include <vector>
 using namespace std;
 
-void Print(queue<int>& Prev)
+void DFS(const int& cnt, const int& max, vector<int> Prev, vector<bool> Checked)
 {
-	while (Prev.size())
+	if (cnt == max)
 	{
-		cout << Prev.front() << " ";
-		Prev.pop();
+		for (int i = 0; i < max; i++)
+			cout << Prev[i] << " ";
+		
+		cout << "\n";
+		return;
 	}
-
-	cout << "\n";
-}
-
-void Backtracking(const int& index, const int& max, queue<int> Prev, vector<bool> Checked)
-{
-	Prev.push(index);
-
-	if (Prev.size() >= max)
-		return Print(Prev);
 
 	for (int i = 1; i < Checked.size(); i++)
 	{
 		if (!Checked[i])
 		{
 			Checked[i] = true;
-			Backtracking(i, max, Prev, Checked);
+			Prev[cnt] = i;
+			DFS(cnt + 1, max, Prev, Checked);
 			Checked[i] = false;
 		}
 	}
@@ -35,15 +28,10 @@ void Backtracking(const int& index, const int& max, queue<int> Prev, vector<bool
 int main()
 {
 	int n{}, m{};
- 
-	std::cin >> n >> m;
+	cin >> n >> m;
 
-	for (int i = 1; i <= n; i++)
-	{
-		vector<bool> Checked(n + 1, false);
-		queue<int> Prev;
-		Checked[i] = true;
-		Backtracking(i, m, Prev, Checked);
-	}
-	return 0;
+	vector<int>Prev(m, 0);
+	vector<bool>Checked(n + 1, false);
+	
+	DFS(0, m, Prev, Checked);
 }
