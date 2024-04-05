@@ -1,35 +1,27 @@
 #include <iostream>
-#include <vector>	
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int main()
 {
-	int n{}, k{}, max{}, sum{};
-
+	int n{}, k{}, res{};
 	cin >> n >> k;
-	vector<int> Table(n);
 
-	for (int i = 0; i < n; i++)
-		cin >> Table[i];
+	vector<int> AccTable(n);
 
-	for (int i = 0; i < n; i++)
-	{
-		sum += Table[i];
-		
-		if (i + 1 < k) continue; // (k == 2, i == 1, 2, 3) ( k == 5, i == 4, 5, 6)
-
-		if (i + 1 == k)
-			max = sum;
-		
-		if (max < sum)
-			max = sum;
-
-		const int outData{ Table[i - k + 1] };
-
-		sum -= outData;
+	cin >> AccTable[0];
+	for (int i = 1; i < n; i++)
+	{	
+		cin >> AccTable[i];
+		AccTable[i] += AccTable[i - 1];
 	}
 
-	cout << max;
+	res = AccTable[k - 1];
+	for (int i = k; i < n; i++)
+		res = max(res, AccTable[i] - AccTable[i - k]);
+
+	cout << res;
 
 	return 0;
 }
